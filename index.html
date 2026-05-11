@@ -2,14 +2,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>MoaiVerse: Admin Clash</title>
+<title>MoaiVerse Admin Clash</title>
 
 <style>
 body{
 margin:0;
 overflow:hidden;
-background:black;
 font-family:Arial;
+background:black;
 }
 
 #game{
@@ -20,10 +20,12 @@ position:relative;
 }
 
 .hero,.enemy{
-width:120px;
-height:120px;
+width:90px;
+height:90px;
 position:absolute;
-bottom:40px;
+bottom:120px;
+border-radius:20px;
+overflow:hidden;
 transition:0.2s;
 }
 
@@ -31,22 +33,21 @@ transition:0.2s;
 width:100%;
 height:100%;
 object-fit:cover;
-border-radius:20px;
 }
 
 .hero{
-left:100px;
+left:80px;
 }
 
 .enemy{
-right:100px;
+right:80px;
 }
 
 #heroHealth,#enemyHealth{
 position:absolute;
 top:20px;
-width:300px;
-height:25px;
+width:220px;
+height:20px;
 background:#333;
 border-radius:20px;
 overflow:hidden;
@@ -62,8 +63,8 @@ right:20px;
 
 .bar{
 height:100%;
-background:lime;
 width:100%;
+background:lime;
 }
 
 #controls{
@@ -74,24 +75,22 @@ transform:translateX(-50%);
 }
 
 button{
-padding:15px 25px;
-font-size:18px;
+padding:12px 20px;
 margin:5px;
 border:none;
 border-radius:10px;
-background:#7c3aed;
+font-size:16px;
+background:#7a00ff;
 color:white;
 }
 
-#text{
+h1{
 position:absolute;
-top:60px;
-left:50%;
-transform:translateX(-50%);
-font-size:28px;
-font-weight:bold;
+top:45px;
+width:100%;
+text-align:center;
 color:white;
-text-shadow:2px 2px 5px black;
+font-size:20px;
 }
 </style>
 </head>
@@ -99,6 +98,8 @@ text-shadow:2px 2px 5px black;
 <body>
 
 <div id="game">
+
+<h1>MOAIVERSE: ADMIN CLASH</h1>
 
 <div id="heroHealth">
 <div class="bar" id="heroBar"></div>
@@ -108,74 +109,55 @@ text-shadow:2px 2px 5px black;
 <div class="bar" id="enemyBar"></div>
 </div>
 
-<div id="text">MOAIVERSE: ADMIN CLASH</div>
-
 <div class="hero" id="hero">
-<img id="heroImg" src="Hero1.png">
+<img src="Hero1.png">
 </div>
 
 <div class="enemy" id="enemy">
-<img id="enemyImg" src="Enemy1.png">
+<img src="Enemy1.png">
 </div>
 
 <div id="controls">
 <button onclick="attack()">ATTACK</button>
-<button onclick="nextHero()">CHANGE HERO</button>
+<button onclick="changeHero()">HERO</button>
+<button onclick="changeEnemy()">ENEMY</button>
 </div>
 
 </div>
 
 <script>
 
-let heroHp = 100;
-let enemyHp = 100;
+let heroHP = 100;
+let enemyHP = 100;
 
 let heroIndex = 1;
 let enemyIndex = 1;
 
 function attack(){
 
-enemyHp -= 20;
+enemyHP -= 10;
 
-if(enemyHp < 0){
-enemyHp = 0;
+if(enemyHP < 0){
+enemyHP = 0;
 }
 
-document.getElementById("enemyBar").style.width = enemyHp + "%";
+document.getElementById("enemyBar").style.width = enemyHP + "%";
 
-document.getElementById("enemy").style.transform = "translateX(-50px)";
+document.getElementById("enemy").style.transform = "translateX(-30px)";
 
 setTimeout(()=>{
 document.getElementById("enemy").style.transform = "translateX(0px)";
 },200);
 
-if(enemyHp == 0){
-
-document.getElementById("text").innerHTML = "ENEMY DEFEATED";
-
-enemyIndex++;
-
-if(enemyIndex > 4){
-enemyIndex = 1;
-}
-
-setTimeout(()=>{
-
-enemyHp = 100;
-
+if(enemyHP == 0){
+alert("ENEMY DEFEATED 🔥");
+enemyHP = 100;
 document.getElementById("enemyBar").style.width = "100%";
-
-document.getElementById("enemyImg").src = "Enemy"+enemyIndex+".png";
-
-document.getElementById("text").innerHTML = "NEW ENEMY";
-
-},1000);
-
 }
 
 }
 
-function nextHero(){
+function changeHero(){
 
 heroIndex++;
 
@@ -183,7 +165,19 @@ if(heroIndex > 4){
 heroIndex = 1;
 }
 
-document.getElementById("heroImg").src = "Hero"+heroIndex+".png";
+document.querySelector("#hero img").src = "Hero"+heroIndex+".png";
+
+}
+
+function changeEnemy(){
+
+enemyIndex++;
+
+if(enemyIndex > 4){
+enemyIndex = 1;
+}
+
+document.querySelector("#enemy img").src = "Enemy"+enemyIndex+".png";
 
 }
 
