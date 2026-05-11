@@ -1,25 +1,25 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MoaiVerse Admin Clash</title>
 
 <style>
 
 body{
 margin:0;
+padding:0;
 overflow:hidden;
+font-family:Arial,sans-serif;
 background:black;
-font-family:Arial;
 }
 
 #game{
 width:100vw;
 height:100vh;
-background:url('Background.png') center center;
-background-size:contain;
-background-repeat:no-repeat;
-background-color:black;
+background:url('Background.png') center center no-repeat;
+background-size:cover;
 position:relative;
 }
 
@@ -50,18 +50,18 @@ border:3px solid white;
 position:absolute;
 top:20px;
 width:180px;
-height:18px;
-background:#222;
+height:20px;
+background:#333;
 border-radius:20px;
 overflow:hidden;
 }
 
 #heroHealth{
-left:15px;
+left:20px;
 }
 
 #enemyHealth{
-right:15px;
+right:20px;
 }
 
 .bar{
@@ -78,13 +78,14 @@ transform:translateX(-50%);
 }
 
 button{
-padding:10px 15px;
-font-size:14px;
+padding:10px 20px;
 margin:5px;
+font-size:16px;
 border:none;
 border-radius:10px;
 background:purple;
 color:white;
+cursor:pointer;
 }
 
 h1{
@@ -93,7 +94,7 @@ top:5px;
 width:100%;
 text-align:center;
 color:white;
-font-size:14px;
+font-size:16px;
 }
 
 </style>
@@ -143,7 +144,7 @@ enemyHp = 0;
 
 document.getElementById("enemyBar").style.width = enemyHp + "%";
 
-if(enemyHp == 0){
+if(enemyHp === 0){
 
 alert("Enemy Defeated!");
 
@@ -162,6 +163,7 @@ heroIndex = 1;
 }
 
 document.getElementById("heroImg").src = "Hero" + heroIndex + ".png";
+
 }
 
 </script>
