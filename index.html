@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>MoaiVerse: Admin Clash</title>
+
+<style>
+body{
+margin:0;
+overflow:hidden;
+background:black;
+font-family:Arial;
+}
+
+#game{
+width:100vw;
+height:100vh;
+background:url('Background.png') center/cover no-repeat;
+position:relative;
+}
+
+.hero,.enemy{
+width:120px;
+height:120px;
+position:absolute;
+bottom:40px;
+transition:0.2s;
+}
+
+.hero img,.enemy img{
+width:100%;
+height:100%;
+object-fit:cover;
+border-radius:20px;
+}
+
+.hero{
+left:100px;
+}
+
+.enemy{
+right:100px;
+}
+
+#heroHealth,#enemyHealth{
+position:absolute;
+top:20px;
+width:300px;
+height:25px;
+background:#333;
+border-radius:20px;
+overflow:hidden;
+}
+
+#heroHealth{
+left:20px;
+}
+
+#enemyHealth{
+right:20px;
+}
+
+.bar{
+height:100%;
+background:lime;
+width:100%;
+}
+
+#controls{
+position:absolute;
+bottom:20px;
+left:50%;
+transform:translateX(-50%);
+}
+
+button{
+padding:15px 25px;
+font-size:18px;
+margin:5px;
+border:none;
+border-radius:10px;
+background:#7c3aed;
+color:white;
+}
+
+#text{
+position:absolute;
+top:60px;
+left:50%;
+transform:translateX(-50%);
+font-size:28px;
+font-weight:bold;
+color:white;
+text-shadow:2px 2px 5px black;
+}
+</style>
+</head>
+
+<body>
+
+<div id="game">
+
+<div id="heroHealth">
+<div class="bar" id="heroBar"></div>
+</div>
+
+<div id="enemyHealth">
+<div class="bar" id="enemyBar"></div>
+</div>
+
+<div id="text">MOAIVERSE: ADMIN CLASH</div>
+
+<div class="hero" id="hero">
+<img id="heroImg" src="Hero1.png">
+</div>
+
+<div class="enemy" id="enemy">
+<img id="enemyImg" src="Enemy1.png">
+</div>
+
+<div id="controls">
+<button onclick="attack()">ATTACK</button>
+<button onclick="nextHero()">CHANGE HERO</button>
+</div>
+
+</div>
+
+<script>
+
+let heroHp = 100;
+let enemyHp = 100;
+
+let heroIndex = 1;
+let enemyIndex = 1;
+
+function attack(){
+
+enemyHp -= 20;
+
+if(enemyHp < 0){
+enemyHp = 0;
+}
+
+document.getElementById("enemyBar").style.width = enemyHp + "%";
+
+document.getElementById("enemy").style.transform = "translateX(-50px)";
+
+setTimeout(()=>{
+document.getElementById("enemy").style.transform = "translateX(0px)";
+},200);
+
+if(enemyHp == 0){
+
+document.getElementById("text").innerHTML = "ENEMY DEFEATED";
+
+enemyIndex++;
+
+if(enemyIndex > 4){
+enemyIndex = 1;
+}
+
+setTimeout(()=>{
+
+enemyHp = 100;
+
+document.getElementById("enemyBar").style.width = "100%";
+
+document.getElementById("enemyImg").src = "Enemy"+enemyIndex+".png";
+
+document.getElementById("text").innerHTML = "NEW ENEMY";
+
+},1000);
+
+}
+
+}
+
+function nextHero(){
+
+heroIndex++;
+
+if(heroIndex > 4){
+heroIndex = 1;
+}
+
+document.getElementById("heroImg").src = "Hero"+heroIndex+".png";
+
+}
+
+</script>
+
+</body>
+</html>
