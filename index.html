@@ -2,13 +2,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>MoaiVerse: Admin Clash</title>
+<title>MoaiVerse Admin Clash</title>
 
 <style>
 body{
 margin:0;
 overflow:hidden;
-background:black;
 font-family:Arial;
 }
 
@@ -19,34 +18,35 @@ background:url('Background.png') center/cover no-repeat;
 position:relative;
 }
 
-.hero,.enemy{
-width:140px;
-height:140px;
+.character{
 position:absolute;
-bottom:40px;
+bottom:50px;
+width:180px;
+height:180px;
 }
 
-.hero{
-left:80px;
+#hero{
+left:40px;
 }
 
-.enemy{
-right:80px;
+#enemy{
+right:40px;
 }
 
-.hero img,.enemy img{
+.character img{
 width:100%;
 height:100%;
 object-fit:cover;
 border-radius:20px;
+border:4px solid white;
 }
 
-#heroHealth,#enemyHealth{
+.health{
 position:absolute;
 top:20px;
-width:300px;
+width:250px;
 height:25px;
-background:#333;
+background:#222;
 border-radius:20px;
 overflow:hidden;
 }
@@ -61,8 +61,8 @@ right:20px;
 
 .bar{
 height:100%;
-background:lime;
 width:100%;
+background:lime;
 }
 
 #controls{
@@ -73,13 +73,12 @@ transform:translateX(-50%);
 }
 
 button{
-padding:15px 25px;
+padding:12px 20px;
 font-size:18px;
+margin:5px;
 border:none;
 border-radius:10px;
-margin:5px;
-cursor:pointer;
-background:#8a2be2;
+background:purple;
 color:white;
 }
 
@@ -89,7 +88,7 @@ top:5px;
 width:100%;
 text-align:center;
 color:white;
-font-size:20px;
+font-size:18px;
 }
 </style>
 </head>
@@ -98,21 +97,21 @@ font-size:20px;
 
 <div id="game">
 
-<h1>MOAIVERSE: ADMIN CLASH</h1>
+<h1>MOAIVERSE ADMIN CLASH</h1>
 
-<div id="heroHealth">
+<div class="health" id="heroHealth">
 <div class="bar" id="heroBar"></div>
 </div>
 
-<div id="enemyHealth">
+<div class="health" id="enemyHealth">
 <div class="bar" id="enemyBar"></div>
 </div>
 
-<div class="hero">
+<div class="character" id="hero">
 <img id="heroImg" src="Hero1.png">
 </div>
 
-<div class="enemy">
+<div class="character" id="enemy">
 <img id="enemyImg" src="Enemy1.png">
 </div>
 
@@ -125,15 +124,12 @@ font-size:20px;
 
 <script>
 
-let heroHp = 100;
 let enemyHp = 100;
-
 let heroIndex = 1;
-let enemyIndex = 1;
 
 function attack(){
 
-enemyHp -= 10;
+enemyHp -= 20;
 
 if(enemyHp < 0){
 enemyHp = 0;
@@ -141,23 +137,9 @@ enemyHp = 0;
 
 document.getElementById("enemyBar").style.width = enemyHp + "%";
 
-document.querySelector(".enemy").style.transform = "translateX(-30px)";
-
-setTimeout(()=>{
-document.querySelector(".enemy").style.transform = "translateX(0px)";
-},200);
-
-if(enemyHp <= 0){
+if(enemyHp == 0){
 
 alert("Enemy Defeated!");
-
-enemyIndex++;
-
-if(enemyIndex > 4){
-enemyIndex = 1;
-}
-
-document.getElementById("enemyImg").src = "Enemy" + enemyIndex + ".png";
 
 enemyHp = 100;
 
